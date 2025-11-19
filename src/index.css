@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables de color y tema */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --primary: 220 90% 56%;
+  --primary-foreground: 48 100% 98%;
+  --secondary: 240 5% 64%;
+  --secondary-foreground: 0 0% 100%;
+  --radius: 0.5rem;
+}
+
+/* Dark mode */
+.dark {
+  --background: 240 10% 4%;
+  --foreground: 0 0% 98%;
+}
+
+/* Ocultar scrollbar pero mantener funcionalidad */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
