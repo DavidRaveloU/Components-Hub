@@ -16,7 +16,7 @@ export function AddTabButton({
   existingTypes = [],
 }: AddTabButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const [position, setPosition] = useState({ top: -1, left: -1 });
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -26,10 +26,40 @@ export function AddTabButton({
   useLayoutEffect(() => {
     if (isOpen && buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
-      setPosition({
-        top: rect.bottom + 8,
-        left: rect.left,
-      });
+      const modalWidth = 520; // Ancho del modal
+      const modalHeight = 400; // Altura máxima aproximada del modal
+      const gap = 8;
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      let top = rect.bottom + gap;
+      let left = rect.left;
+
+      // Verificar si el modal cabe debajo del botón
+      const spaceBelow = viewportHeight - rect.bottom;
+      const spaceAbove = rect.top;
+
+      if (spaceBelow < modalHeight + gap && spaceAbove > spaceBelow) {
+        // No cabe debajo pero sí arriba - mostrar arriba
+        top = rect.top - modalHeight - gap;
+      }
+
+      // Verificar límites horizontales
+      if (left + modalWidth > viewportWidth) {
+        // Se sale por la derecha - alinear a la derecha
+        left = viewportWidth - modalWidth - 16; // 16px de margen
+      }
+
+      // Asegurar que no se salga por la izquierda
+      if (left < 16) {
+        left = 16;
+      }
+
+      // eslint-disable-next-line -- Valid use of setState in useLayoutEffect for DOM positioning
+      setPosition({ top, left });
+    } else if (!isOpen) {
+      // Resetear posición cuando se cierra para forzar recálculo en próxima apertura
+      setPosition({ top: -1, left: -1 });
     }
   }, [isOpen]);
 

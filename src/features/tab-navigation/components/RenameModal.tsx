@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { X } from "lucide-react";
 import { cn } from "@/utils/cn";
@@ -18,7 +18,17 @@ export function RenameModal({
   onConfirm,
 }: RenameModalProps) {
   const [value, setValue] = useState(currentName);
+  const [isMounted, setIsMounted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Marcar como montado después de que el modal esté en el DOM
+  useLayoutEffect(() => {
+    if (isOpen) {
+      setIsMounted(true);
+    } else {
+      setIsMounted(false);
+    }
+  }, [isOpen]);
 
   // Auto-focus cuando se abre
   useEffect(() => {
@@ -52,12 +62,20 @@ export function RenameModal({
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/20 z-[9998] animate-in fade-in-0 duration-150"
+        className={cn(
+          "fixed inset-0 bg-black/20 z-[9998] transition-opacity duration-150",
+          isMounted ? "opacity-100" : "opacity-0"
+        )}
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] w-full max-w-md animate-in fade-in-0 zoom-in-95 duration-150">
+      <div 
+        className={cn(
+          "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] w-full max-w-md transition-all duration-150",
+          isMounted ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        )}
+      >
         <div className="bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden">
           {/* Header */}
           <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">

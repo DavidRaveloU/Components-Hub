@@ -1,5 +1,5 @@
 import { GripVertical, MoreVertical } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { CSS } from "@dnd-kit/utilities";
 import type { TabProps } from "../types/tab.types";
@@ -25,7 +25,7 @@ export function TabComponent({
   isDragging,
 }: ExtendedTabProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
+  const [menuPosition, setMenuPosition] = useState({ top: -1, left: -1 });
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -50,14 +50,44 @@ export function TabComponent({
 
   const isBeingDragged = isDragging || isSortableDragging;
 
-  // POSICIÓN DEL MENÚ
-  useEffect(() => {
+  // POSICIÓN DEL MENÚ - useLayoutEffect para calcular ANTES del paint
+  useLayoutEffect(() => {
     if (menuOpen && menuButtonRef.current) {
       const rect = menuButtonRef.current.getBoundingClientRect();
-      setMenuPosition({
-        top: rect.bottom + 4,
-        left: rect.left - 120,
-      });
+      const menuWidth = 180;
+      const menuHeight = 150; // Altura aproximada del menú
+      const gap = 4;
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      let top = rect.bottom + gap;
+      let left = rect.left - 120; // Offset para alinear a la derecha del botón
+
+      // Verificar si el menú cabe debajo del botón
+      const spaceBelow = viewportHeight - rect.bottom;
+      const spaceAbove = rect.top;
+
+      if (spaceBelow < menuHeight + gap && spaceAbove > spaceBelow) {
+        // No cabe debajo pero sí arriba - mostrar arriba
+        top = rect.top - menuHeight - gap;
+      }
+
+      // Verificar límites horizontales
+      if (left + menuWidth > viewportWidth) {
+        // Se sale por la derecha - alinear a la derecha
+        left = viewportWidth - menuWidth - 16;
+      }
+
+      // Asegurar que no se salga por la izquierda
+      if (left < 16) {
+        left = 16;
+      }
+
+      // eslint-disable-next-line -- Valid use of setState in useLayoutEffect for DOM positioning
+      setMenuPosition({ top, left });
+    } else if (!menuOpen) {
+      // Resetear posición cuando se cierra para forzar recálculo en próxima apertura
+      setMenuPosition({ top: -1, left: -1 });
     }
   }, [menuOpen]);
 
@@ -110,6 +140,8 @@ export function TabComponent({
       <div
         ref={setNodeRef}
         style={style}
+        {...attributes}
+        {...listeners}
         className={cn(
           "h-8 px-2.5 py-1 rounded-lg flex justify-center items-center gap-1.5",
           "text-sm font-medium leading-tight transition-all duration-300 ease-out",
@@ -117,25 +149,21 @@ export function TabComponent({
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#2F72E2]",
           "focus-visible:ring-offset-0 focus-visible:shadow-[0_0_0_4px_rgba(47,114,226,0.1)]",
           isActive
-            ? "bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] border border-gray-200 cursor-grab"
-            : "bg-gray-400/15 hover:bg-gray-400/35 cursor-grab",
+            ? "bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] border border-gray-200 cursor-grab active:cursor-grabbing"
+            : "bg-gray-400/15 hover:bg-gray-400/35 cursor-grab active:cursor-grabbing",
           isBeingDragged && "opacity-30 scale-95"
         )}
         onClick={() => onSelect(tab.id)}
       >
-        {/* Drag Handle */}
-        <button
-          {...attributes}
-          {...listeners}
+        {/* Drag Handle - Visual indicator only */}
+        <div
           className={cn(
-            "cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100",
-            "text-gray-400 hover:text-gray-500 transition-opacity",
-            "touch-none -ml-1 flex items-center"
+            "text-gray-400",
+            "-ml-1 flex items-center"
           )}
-          onClick={(e) => e.stopPropagation()}
         >
           <GripVertical className="w-3.5 h-3.5" />
-        </button>
+        </div>
 
         {/* Icon */}
         <div
@@ -175,7 +203,7 @@ export function TabComponent({
       </div>
 
       {/* MENU DESPLEGABLE */}
-      {menuOpen &&
+      {menuOpen && menuPosition.top > 0 && menuPosition.left >= 0 &&
         createPortal(
           <div
             ref={menuRef}
