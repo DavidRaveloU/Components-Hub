@@ -106,13 +106,13 @@ export function AddTabButton({
         type="button"
         className={cn(
           "h-8 px-2.5 py-1 rounded-lg flex justify-center items-center gap-1.5",
-          "text-sm font-medium leading-tight transition-all duration-300 ease-out",
+          "text-sm font-medium leading-tight transition-all duration-300 transition-spring",
           "flex-shrink-0 transform-gpu",
-          "bg-gray-400/15 hover:bg-gray-400/35",
+          "bg-gray-400/15 hover:bg-gray-400/35 hover:scale-105",
           "text-gray-600",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#2F72E2]",
           "focus-visible:ring-offset-0 focus-visible:shadow-[0_0_0_4px_rgba(47,114,226,0.1)]",
-          isOpen && "bg-gray-400/35"
+          isOpen && "bg-gray-400/35 scale-105"
         )}
       >
         <Plus className="w-4 h-4" />
@@ -124,7 +124,7 @@ export function AddTabButton({
         createPortal(
           <div
             ref={dropdownRef}
-            className="fixed z-[9999] w-[520px] bg-white rounded-xl shadow-2xl border border-gray-200 animate-in fade-in-0 zoom-in-95 duration-200"
+            className="fixed z-[9999] w-[520px] bg-white rounded-xl shadow-2xl border border-gray-200 animate-spring-fade"
             style={{
               top: `${position.top}px`,
               left: `${position.left}px`,
@@ -153,10 +153,10 @@ export function AddTabButton({
                     type="button"
                     className={cn(
                       "w-full flex items-start gap-3 p-3 rounded-lg",
-                      "text-left transition-all duration-200",
+                      "text-left transition-all duration-200 transition-spring",
                       alreadyExists
                         ? "opacity-50 cursor-not-allowed"
-                        : "hover:bg-gray-50 cursor-pointer active:scale-[0.98]"
+                        : "hover:bg-gray-50 hover:scale-[1.02] cursor-pointer active:scale-[0.98]"
                     )}
                   >
                     {/* Icon con fondo de color */}

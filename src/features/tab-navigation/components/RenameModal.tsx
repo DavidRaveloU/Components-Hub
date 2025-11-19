@@ -63,7 +63,7 @@ export function RenameModal({
       {/* Backdrop */}
       <div
         className={cn(
-          "fixed inset-0 bg-black/20 z-[9998] transition-opacity duration-150",
+          "fixed inset-0 bg-black/20 z-[9998] transition-opacity duration-200",
           isMounted ? "opacity-100" : "opacity-0"
         )}
         onClick={onClose}
@@ -72,8 +72,9 @@ export function RenameModal({
       {/* Modal */}
       <div 
         className={cn(
-          "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] w-full max-w-md transition-all duration-150",
-          isMounted ? "opacity-100 scale-100" : "opacity-0 scale-95"
+          "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] w-full max-w-md",
+          "transition-all duration-300 transition-spring",
+          isMounted ? "opacity-100 scale-100" : "opacity-0 scale-90"
         )}
       >
         <div className="bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden">

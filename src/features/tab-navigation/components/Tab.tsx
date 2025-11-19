@@ -144,10 +144,11 @@ export function TabComponent({
         {...listeners}
         className={cn(
           "h-8 px-2.5 py-1 rounded-lg flex justify-center items-center gap-1.5",
-          "text-sm font-medium leading-tight transition-all duration-300 ease-out",
+          "text-sm font-medium leading-tight transition-all duration-300 transition-spring",
           "relative group flex-shrink-0 transform-gpu",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#2F72E2]",
           "focus-visible:ring-offset-0 focus-visible:shadow-[0_0_0_4px_rgba(47,114,226,0.1)]",
+          "animate-spring-slide", // Animación de entrada
           isActive
             ? "bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] border border-gray-200 cursor-grab active:cursor-grabbing"
             : "bg-gray-400/15 hover:bg-gray-400/35 cursor-grab active:cursor-grabbing",
@@ -207,7 +208,7 @@ export function TabComponent({
         createPortal(
           <div
             ref={menuRef}
-            className="fixed z-[9999] w-[180px] bg-white rounded-lg shadow-xl border border-gray-200 py-1 animate-in fade-in-0 zoom-in-95 duration-150"
+            className="fixed z-[9999] w-[180px] bg-white rounded-lg shadow-xl border border-gray-200 py-1 animate-spring-fade"
             style={{
               top: `${menuPosition.top}px`,
               left: `${menuPosition.left}px`,
