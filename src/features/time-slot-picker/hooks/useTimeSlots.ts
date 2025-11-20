@@ -105,12 +105,31 @@ export function useTimeSlots({
     [days, onChange]
   );
 
+  // Función para eliminar todos los rangos de un día
+  const clearDayRanges = useCallback(
+    (dayId: string) => {
+      const updatedDays = days.map((day) => {
+        if (day.id === dayId) {
+          return {
+            ...day,
+            timeRanges: [],
+          };
+        }
+        return day;
+      });
+      setDays(updatedDays);
+      onChange?.(updatedDays);
+    },
+    [days, onChange]
+  );
+
   return {
     days,
     toggleDay,
     addTimeRange,
     updateTimeRange,
     deleteTimeRange,
+    clearDayRanges,
   };
 }
 
