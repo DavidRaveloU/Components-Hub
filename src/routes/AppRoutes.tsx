@@ -2,12 +2,14 @@ import { Route, Routes } from "react-router-dom";
 
 import { Home } from "@/pages/Home";
 import { TabNavigationDemo } from "@/pages/demos/TabNavigationDemo";
+import { TimeSlotPickerDemo } from "@/pages/demos/TimeSlotPickerDemo";
 
 export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/demo/tab-navigation" element={<TabNavigationDemo />} />
+      <Route path="/demo/time-slot-picker" element={<TimeSlotPickerDemo />} />
 
       {/* Ruta 404 */}
       <Route
