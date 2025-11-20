@@ -12,6 +12,15 @@ export const COMPONENTS: ComponentInfo[] = [
     route: "/demo/tab-navigation",
     difficulty: "easy",
   },
+  {
+    id: "time-slot-picker",
+    name: "Time Slot Picker",
+    description: "Select time slots with drag and drop",
+    category: "Input",
+    tags: ["time", "slot", "picker", "drag and drop", "accessibility"],
+    route: "/demo/time-slot-picker",
+    difficulty: "easy",
+  }
 ];
 
 /** Obtener todas las categorías únicas */

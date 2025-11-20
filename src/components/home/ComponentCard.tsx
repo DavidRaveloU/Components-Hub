@@ -59,12 +59,12 @@ export function ComponentCard({ component }: ComponentCardProps) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-wrap fap-2">
+          <div className="text-xs mr-2 mt-3">
             <Badge className="mr-2" variant={"secondary"}>
               {component.category}
             </Badge>
             {component.tags.slice(0, 3).map((tag) => (
-              <Badge key={tag} variant={"outline"} className="text-xs mr-2">
+              <Badge key={tag} variant={"outline"} className="text-xs mr-2 mt-3">
                 {tag}
               </Badge>
             ))}
