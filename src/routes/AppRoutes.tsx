@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { Home } from "@/pages/Home";
 import { TabNavigationDemo } from "@/pages/demos/TabNavigationDemo";
 import { TimeSlotPickerDemo } from "@/pages/demos/TimeSlotPickerDemo";
+import { ToastNotificationDemo } from "@/pages/demos/ToastNotificationDemo";
 
 export function AppRoutes() {
   return (
@@ -10,6 +11,7 @@ export function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/demo/tab-navigation" element={<TabNavigationDemo />} />
       <Route path="/demo/time-slot-picker" element={<TimeSlotPickerDemo />} />
+      <Route path="/demo/toast-notification" element={<ToastNotificationDemo />} />
 
       {/* Ruta 404 */}
       <Route
