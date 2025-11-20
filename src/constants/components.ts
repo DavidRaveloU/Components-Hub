@@ -20,7 +20,16 @@ export const COMPONENTS: ComponentInfo[] = [
     tags: ["time", "slot", "picker", "drag and drop", "accessibility"],
     route: "/demo/time-slot-picker",
     difficulty: "easy",
-  }
+  },
+  {
+    id: "toast-notification",
+    name: "Toast Notification",
+    description: "Show toast notifications",
+    category: "Feedback",
+    tags: ["toast", "notification", "accessibility"],
+    route: "/demo/toast-notification",
+    difficulty: "medium",
+  },
 ];
 
 /** Obtener todas las categorías únicas */
