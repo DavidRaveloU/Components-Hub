@@ -1,0 +1,1 @@
+// Contenedor de todos los toasts (maneja posiciones)
