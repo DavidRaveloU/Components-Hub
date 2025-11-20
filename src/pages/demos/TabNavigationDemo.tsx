@@ -8,37 +8,23 @@ export function TabNavigationDemo() {
   const [tabs, setTabs] = useState<Tab[]>([
     {
       id: "tab-1",
-      type: "dashboard",
-      label: "Info",
+      type: "analytics",
+      label: "Analytics",
       order: 0,
       isActive: true,
     },
     {
       id: "tab-2",
-      type: "payment",
-      label: "Form",
+      type: "notifications",
+      label: "Notifications",
       order: 1,
       isActive: false,
     },
     {
       id: "tab-3",
-      type: "analytics",
-      label: "Cover",
+      type: "messages",
+      label: "Messages",
       order: 2,
-      isActive: false,
-    },
-    {
-      id: "tab-4",
-      type: "settings",
-      label: "Payment",
-      order: 3,
-      isActive: false,
-    },
-    {
-      id: "tab-5",
-      type: "login",
-      label: "Login",
-      order: 4,
       isActive: false,
     },
   ]);
