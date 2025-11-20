@@ -14,6 +14,7 @@ export const TimeSlotPicker = ({
     addTimeRange,
     updateTimeRange,
     deleteTimeRange,
+    clearDayRanges,
   } = useTimeSlots({
     initialDays,
     onChange,
@@ -30,6 +31,7 @@ export const TimeSlotPicker = ({
             onAddRange={addTimeRange}
             onUpdateRange={updateTimeRange}
             onDeleteRange={deleteTimeRange}
+            onClearAll={clearDayRanges}
           />
         ))}
       </div>
