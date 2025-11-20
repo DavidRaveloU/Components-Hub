@@ -1,0 +1,1 @@
+// Utilidades (generar ID, etc.)
