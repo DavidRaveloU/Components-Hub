@@ -123,3 +123,100 @@
 .transition-magnetic {
   transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+
+/* ========================================
+   iOS-STYLE ANIMATIONS - Smooth & Organic
+   ======================================== */
+
+/* iOS Expand - Expansión suave desde el centro */
+@keyframes ios-expand {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* iOS Slide Down - Deslizamiento vertical suave */
+@keyframes ios-slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* iOS Fade Expand - Fade con expansión muy sutil */
+@keyframes ios-fade-expand {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* iOS Collapse - Para cuando algo desaparece */
+@keyframes ios-collapse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+
+/* iOS Height Expand - Para contenedores que crecen en altura */
+@keyframes ios-height-expand {
+  0% {
+    opacity: 0;
+    max-height: 0;
+    transform: scaleY(0.8);
+  }
+  100% {
+    opacity: 1;
+    max-height: 500px;
+    transform: scaleY(1);
+  }
+}
+
+/* Utility Classes - iOS Style */
+.animate-ios-expand {
+  animation: ios-expand 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-ios-slide-down {
+  animation: ios-slide-down 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-ios-fade-expand {
+  animation: ios-fade-expand 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-ios-collapse {
+  animation: ios-collapse 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-ios-height-expand {
+  animation: ios-height-expand 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Easing iOS - Suave y natural */
+.transition-ios {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Easing iOS Ease-Out - Más rápido al inicio */
+.transition-ios-out {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
