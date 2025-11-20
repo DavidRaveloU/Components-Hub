@@ -1,0 +1,1 @@
+// Barra de progreso del timer
