@@ -1,8 +1,13 @@
+import { ToastContainer, useToast } from "@/features/toast-notification";
+
 import { Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export function ToastNotificationDemo() {
+  // Toast hook
+  const toast = useToast();
+
   // Estado para el panel de control
   const [toastType, setToastType] = useState<"success" | "error" | "warning" | "info" | "default">("success");
   const [position, setPosition] = useState<"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right">("top-right");
@@ -12,8 +17,48 @@ export function ToastNotificationDemo() {
   const [title, setTitle] = useState("Success!");
   const [description, setDescription] = useState("Your file was saved successfully!");
 
+  // Generar toast
+  const handleGenerateToast = () => {
+    const options = {
+      title: title || undefined,
+      description,
+      position,
+      animation,
+      duration: hasTimer ? duration : undefined,
+    };
+
+    // Llamar al método según el tipo
+    switch (toastType) {
+      case "success":
+        toast.success(options);
+        break;
+      case "error":
+        toast.error(options);
+        break;
+      case "warning":
+        toast.warning(options);
+        break;
+      case "info":
+        toast.info(options);
+        break;
+      case "default":
+        toast.default(options);
+        break;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Toast Container */}
+      <ToastContainer
+        toasts={toast.toasts}
+        onDismiss={toast.dismiss}
+        onExpand={toast.expand}
+        onCollapse={toast.collapse}
+        onPause={toast.pause}
+        onResume={toast.resume}
+      />
+
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-8 py-6">
@@ -34,31 +79,33 @@ export function ToastNotificationDemo() {
             Toast Notifications
           </h1>
           <p className="text-gray-600">
-            Customizable toast notifications with stacking, animations, and auto-dismiss
+            Customizable toast notifications with animations and auto-dismiss. Maximum 3 toasts per position.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Control Panel */}
-          <div className="lg:col-span-1">
-            <div className="bg-white border border-gray-200 rounded-xl p-6 sticky top-8">
-              <h2 className="text-lg font-semibold text-gray-900 mb-6">
-                Customize Toast
-              </h2>
+        {/* Control Panel - Grid de 2 columnas */}
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-white border border-gray-200 rounded-xl p-8">
+            <h2 className="text-lg font-semibold text-gray-900 mb-6">
+              Customize Toast
+            </h2>
 
+            {/* Grid de 2 columnas */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Columna Izquierda */}
               <div className="space-y-6">
                 {/* Toast Type */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-3">
                     Type
                   </label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-3 gap-2">
                     {(["success", "error", "warning", "info", "default"] as const).map((type) => (
                       <button
                         key={type}
                         onClick={() => setToastType(type)}
                         className={`
-                          px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transition-ios
+                          px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 transition-ios
                           ${toastType === type
                             ? type === "success" ? "bg-green-100 text-green-700 border-2 border-green-500"
                             : type === "error" ? "bg-red-100 text-red-700 border-2 border-red-500"
@@ -139,7 +186,10 @@ export function ToastNotificationDemo() {
                     ))}
                   </div>
                 </div>
+              </div>
 
+              {/* Columna Derecha */}
+              <div className="space-y-6">
                 {/* Timer Toggle */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -212,6 +262,7 @@ export function ToastNotificationDemo() {
 
                 {/* Generate Button */}
                 <button
+                  onClick={handleGenerateToast}
                   className="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:scale-[0.98] transition-all duration-200 transition-ios-out shadow-lg shadow-blue-500/30"
                 >
                   Generate Toast
@@ -219,28 +270,12 @@ export function ToastNotificationDemo() {
 
                 {/* Clear All Button */}
                 <button
+                  onClick={() => toast.dismissAll()}
                   className="w-full py-2 px-4 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 active:scale-[0.98] transition-all duration-200 transition-ios text-sm"
                 >
                   Clear All Toasts
                 </button>
               </div>
-            </div>
-          </div>
-
-          {/* Preview Area */}
-          <div className="lg:col-span-2">
-            <div className="bg-white border border-gray-200 rounded-xl p-8 min-h-[600px] relative sticky top-8">
-              <div className="text-center text-gray-400 mt-32">
-                <div className="text-6xl mb-4">🔔</div>
-                <h3 className="text-xl font-semibold text-gray-600 mb-2">
-                  Toast Preview Area
-                </h3>
-                <p className="text-sm text-gray-500">
-                  Click "Generate Toast" to see your customized notification
-                </p>
-              </div>
-
-              {/* Aquí aparecerán los toasts en las diferentes posiciones */}
             </div>
           </div>
         </div>
