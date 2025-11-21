@@ -220,3 +220,68 @@
 .transition-ios-out {
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Toast Animations */
+.animate-ios-slide-in {
+  animation: ios-slide-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-ios-fade-in {
+  animation: ios-fade-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-ios-bounce-in {
+  animation: ios-bounce-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-ios-zoom-in {
+  animation: ios-zoom-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes ios-slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes ios-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ios-bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ios-zoom-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
