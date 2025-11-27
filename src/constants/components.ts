@@ -30,6 +30,17 @@ export const COMPONENTS: ComponentInfo[] = [
     route: "/demo/toast-notification",
     difficulty: "medium",
   },
+  {
+    id: "file-upload",
+    name: "File Upload",
+    description:
+      "Upload files with drag & drop, preview, and progress tracking",
+    category: "Input",
+    tags: ["upload", "file", "drag-drop", "preview"],
+    route: "/demo/file-upload",
+    difficulty: "medium",
+    dependencies: ["react"],
+  },
 ];
 
 /** Obtener todas las categorías únicas */
