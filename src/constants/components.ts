@@ -41,6 +41,16 @@ export const COMPONENTS: ComponentInfo[] = [
     difficulty: "medium",
     dependencies: ["react"],
   },
+  {
+    id: "color-picker",
+    name: "Color Picker",
+    description:
+      "Extract colors from images, pick with eyedropper, and create palettes",
+    category: "Input",
+    tags: ["color", "picker", "eyedropper", "palette", "image"],
+    route: "/demo/color-picker",
+    difficulty: "medium",
+  },
 ];
 
 /** Obtener todas las categorías únicas */
