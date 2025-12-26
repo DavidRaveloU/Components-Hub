@@ -51,6 +51,16 @@ export const COMPONENTS: ComponentInfo[] = [
     route: "/demo/color-picker",
     difficulty: "medium",
   },
+  {
+    id: "expandable-cards-hero",
+    name: "Expandable Cards Hero",
+    description:
+      "Spotify-style expandable cards with smooth hero animations",
+    category: "Display",
+    tags: ["cards", "hero", "animation", "expandable", "spotify"],
+    route: "/demo/expandable-cards-hero",
+    difficulty: "medium",
+  },
 ];
 
 /** Obtener todas las categorías únicas */
