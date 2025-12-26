@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import { ColorPickerDemo } from "@/pages/demos/ColorPickerDemo";
+import ExpandableCardsHeroDemo from "@/pages/demos/ExpandableCardsHeroDemo";
 import { FileUploadDemo } from "@/pages/demos/FileUploadDemo";
 import { Home } from "@/pages/Home";
 import { TabNavigationDemo } from "@/pages/demos/TabNavigationDemo";
@@ -16,6 +17,7 @@ export function AppRoutes() {
       <Route path="/demo/toast-notification" element={<ToastNotificationDemo />} />
       <Route path="/demo/file-upload" element={<FileUploadDemo />} />
       <Route path="/demo/color-picker" element={<ColorPickerDemo />} />
+      <Route path="/demo/expandable-cards-hero" element={<ExpandableCardsHeroDemo />} />
 
       {/* Ruta 404 */}
       <Route
